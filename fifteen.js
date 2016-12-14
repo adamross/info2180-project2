@@ -2,7 +2,8 @@
 var posX;
 var posY;
 var pieces;
-window.onload = function(){
+window.onload = function()
+{
   var puzzlearea = document.getElementById('puzzlearea');
   pieces = puzzlearea.getElementsByTagName('div');
   for (var i = 0; i < pieces.length; i++)
@@ -15,22 +16,19 @@ window.onload = function(){
     {
       if (moveCheck(parseInt(this.innerHTML)))
       {
-        pieces[i].style.border= '2px solid  black';
+        this.setAttribute('class', 'puzzlepiece movablepiece');
       }
-    };
-    // pieces[i].onmouseout = function(){
-    //   pieces[i].removeClassName("movablepiece");
-    // };
+    }
 
     pieces[i].onclick = function(){
       if (moveCheck(parseInt(this.innerHTML))){
         swap(this.innerHTML-1);
         if (finished()===true){
-          var win = setTimeout(done(), 5000);
+          setTimeout(function(){alert("You Won!");}, 500);
         }
         return;
       }
-    };
+    }
   }
 
   posX = '300px';
@@ -196,9 +194,4 @@ function finished()
     }
   }
   return finish;
-}
-
-function done()
-{
-  alert("You Won!");
 }
